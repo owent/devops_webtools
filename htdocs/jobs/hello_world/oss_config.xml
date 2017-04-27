@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<oss>
+    <desc><!--
+        y轴支持的特殊函数:(可以使用简单的javascript库函数，如Math.*)
+          取值:       val(数据源.字段[, 过滤规则])
+          总和:       sum(数据源.字段[, 过滤规则])
+          平均值:      avg(数据源.字段[, 过滤规则])     [一组有多条数据时按条数取平均]
+          第一条:      first(数据源.字段[, 过滤规则])
+          最后一条:     last(数据源.字段[, 过滤规则])
+          计数:       count(数据源.字段[, 过滤规则])
+          字段乘积和:    multi([数据源.字段...])      [当有多条数据时，计算每条数据的对应字段的乘积再求和,注意和sum(a) * sum(b) ... 的区别是后者为先求和再乘积]
+          生成过滤规则:   filter('字段或数字>/>=/</<=/=字段或数字')
+    --></desc>
+    <cat name="用户和账号">
+        <view name="实时数据">
+            <data_source id="origin" limit="timestamp" db="stats" table="online_user"></data_source>
+
+            <x name="日期时间" method="minute" unit="1" count="2160">origin.timestamp</x>
+            <y name="实时在线">sum('origin.online_number')</y>
+        </view>
+        
+        <view name="每日活跃用户">
+            <data_source id="origin" limit="timestamp" db="stats" table="login"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="DAU">sum('origin.online_number')</y>
+            <y name="平均打在时长（秒）" axis="y2axis">multi('origin.online_number', 'origin.online_time_avg') / sum('origin.online_number')</y>
+        </view>
+
+        <view name="次日注册和留存">
+            <data_source id="origin" limit="timestamp" db="stats" table="register"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="新增用户数(个)">sum('origin.register_number')</y>
+            <y name="留存(%)" axis="y2axis">sum('origin.login_number') * 100 / sum('origin.register_number')</y>
+        </view>
+
+        <view name="7日注册和留存">
+            <data_source id="origin" limit="timestamp" db="stats" table="register7"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="新增用户数(个)">sum('origin.register_number')</y>
+            <y name="留存(%)" axis="y2axis">sum('origin.login_number') * 100 / sum('origin.register_number')</y>
+        </view>
+    </cat>
+    <cat name="竞技场">
+        <view name="参与人数">
+            <data_source id="origin" limit="timestamp" db="stats" table="arena_player"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="参与用户数量(个)">sum('origin.user_num')</y>
+        </view>
+
+        <view name="黄金消耗统计">
+            <data_source id="origin" limit="timestamp" count="30" db="stats" table="arena_consume"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="重置CD(总消耗)">Math.abs(sum('origin.consume_golden_sum', filter('arena_type=570907')))</y>
+            <y name="重置CD(平均消耗)" axis="y2axis">Math.abs(sum('origin.consume_golden_avg', filter('arena_type=570907')))</y>
+            <y name="购买次数(总消耗)">Math.abs(sum('origin.consume_golden_sum', filter('arena_type=570908')))</y>
+            <y name="购买次数(平均消耗)" axis="y2axis">Math.abs(sum('origin.consume_golden_avg', filter('arena_type=570908')))</y>
+        </view>
+    </cat>
+    <cat name="关卡和副本">
+        <view name="PVE副本总量统计">
+            <data_source id="origin" limit="timestamp" db="stats" table="story"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="总胜利次数(次)">sum('origin.victory_times_sum')</y>
+            <y name="总启动次数(次)">sum('origin.start_times_sum')</y>
+            <y name="总获得星星数量(个)" axis="y2axis">multi('origin.stars', 'origin.user_num')</y>
+        </view>
+    </cat>
+    <cat name="商城、酒馆和资源">
+        <view name="资源购买">
+            <data_source id="origin" limit="timestamp" db="stats" table="resource"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="购买白银(总消耗)">Math.abs(sum('origin.consume_golden_sum', filter('resource_id=201001')))</y>
+            <y name="购买白银(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_golden_avg', filter('resource_id=201001')))</y>
+            <y name="购买粮草(总消耗)">Math.abs(sum('origin.consume_golden_sum', filter('resource_id=203001')))</y>
+            <y name="购买粮草(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_golden_avg', filter('resource_id=203001')))</y>
+            <y name="购买技能点(总消耗)">Math.abs(sum('origin.consume_golden_sum', filter('resource_id=207001')))</y>
+            <y name="购买技能点(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_golden_avg', filter('resource_id=207001')))</y>
+            <y name="购买技能书(总消耗)">Math.abs(sum('origin.consume_golden_sum', filter('resource_id=207002')))</y>
+            <y name="购买技能书(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_golden_avg', filter('resource_id=207002')))</y>
+        </view>
+        <view name="酒馆消耗">
+            <data_source id="origin" limit="timestamp" db="stats" table="lottery"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="酒宴白银消耗(总消耗)">Math.abs(sum('origin.consume_sum', [filter('cost_id=201001'), filter('lottery_type=0')]))</y>
+            <y name="酒宴白银消耗(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_avg', [filter('cost_id=201001'), filter('lottery_type=0')]))</y>
+            <y name="盛宴黄金消耗(总消耗)">Math.abs(sum('origin.consume_sum', [filter('cost_id=202001'), filter('lottery_type=1')]))</y>
+            <y name="盛宴黄金消耗(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_avg', [filter('cost_id=202001'), filter('lottery_type=1')]))</y>
+            <y name="满汉全席黄金消耗(总消耗)">Math.abs(sum('origin.consume_sum', [filter('cost_id=202001'), filter('lottery_type=2')]))</y>
+            <y name="满汉全席黄金消耗(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_avg', [filter('cost_id=202001'), filter('lottery_type=2')]))</y>
+        </view>
+        <view name="商城购买消耗">
+            <data_source id="origin" limit="timestamp" db="stats" table="lottery"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="白银消耗(总消耗)">Math.abs(sum('origin.consume_sum', [filter('cost_id=201001')]))</y>
+            <y name="白银消耗(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_avg', [filter('cost_id=201001')]))</y>
+            <y name="黄金消耗(总消耗)">Math.abs(sum('origin.consume_sum', [filter('cost_id=202001')]))</y>
+            <y name="黄金消耗(平均消耗)" axis="y2axis">Math.abs(avg('origin.consume_avg', [filter('cost_id=202001')]))</y>
+        </view>
+        <view name="商城刷新消耗">
+            <data_source id="origin" limit="timestamp" db="stats" table="market_refresh"></data_source>
+
+            <x name="日期时间" method="day" unit="1" count="30">origin.timestamp</x>
+            <y name="黄金(总消耗)">Math.abs(sum('origin.consume_sum', [filter('cost_id=202001')]))</y>
+            <y name="总次数" axis="y2axis">sum('origin.refresh_times_sum')</y>
+        </view>
+    </cat>
+</oss>
+ 

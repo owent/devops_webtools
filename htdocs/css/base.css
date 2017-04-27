@@ -1,0 +1,91 @@
+body { 
+	padding-bottom: 70px;
+	min-width: 936px;
+}
+
+.header-top {
+	font-size:93%;
+	background:#2b2b2b;
+	padding:8px 25px 0 25px;
+	color: White;
+	border-bottom:1px solid #1a1a1a;
+	text-shadow: 0 -1px 0 #000000;
+}
+.header-middle {
+	padding:32px 25px 0 25px;
+}
+#nav li {
+	min-width: 168px;
+}
+
+.header-bottom {
+}
+
+pre {
+	white-space: pre-wrap;
+	padding: 9.5px;
+	border: 1px solid #ccc;
+}
+
+/*  Page */
+#page {
+	width: 100%;
+}
+
+/*////   - Sidebar -   ////*/
+#aside {
+	background-color: #F0F0F0;
+}
+
+
+#sidebar-nav a {
+	color: Black;
+}
+#sidebar-nav>li>a {
+	padding:12px 5px;
+	border-bottom:1px solid #CCCCCC;
+	display:block;
+	text-decoration:none;
+	font-size:108%;
+	color:#262626;
+	font-weight:bold;
+}
+#sidebar-nav>li {
+	width: 100%;
+}
+
+#sidebar-nav .drop a {
+	border-bottom:1px solid #d9d9d9;
+	margin-left:30px;
+	font-size:100%;
+	font-weight:normal;
+	padding: 12px 10px;
+}
+
+/* 仿Win8消息提示面板 */
+.sys_panel {
+    font-family: SegoeWP;
+    margin: 0.266666em 0.266666em 0.266666em 0.266666em;
+    background: #f5f5f5;
+    border: 0.133333em none transparent;
+    color: #333333;
+    display: inline-block;
+}
+
+div.push_alert_wrapper {
+	position: fixed;
+	right: 0;
+	top: 0;
+	max-width: 480px;
+	overflow: hidden;
+	z-index: 100237;
+}
+
+.push_alert_element {
+	position: relative;
+	min-width: 280px;
+	min-height: 32px;
+	float: right;
+	right: -100%;
+}
+

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publish_addrs>
+    <zone name="Dev1公共开发环境(IP或域名)" status="OK" id="1">
+        <url>IP或域名</url>
+        <port>22</port>
+        <user>运行服务器进程用户名</user>
+        <passwd>运行服务器进程用户的密码</passwd>
+        <install_path>/home/运行服务器进程用户名/hello_world</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>1</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清空数据库" noserver="true">cd /home/redis/latest/bin; for ((i=7001;i&lt;=7006;++i)); do ./redis-cli -c -p $i FLUSHALL; done</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>1</group_id>
+            <outer_domain>IP或域名</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>127.0.0.1:7001-7006</db_cluster>
+            <etcd_host>http://127.0.0.1:2379</etcd_host>
+            <map_server_etcd_host>http://127.0.0.1:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+</publish_addrs>

@@ -1,0 +1,38 @@
+说明:
+==========================================================================================================
+所有指令型（action参数值为cmd的请求）会优先读取 工程目录/cmds/[指令名称].cmd.php ，如果不存在则会读取 ~/cmds/[指令名称].cmd.php
+所有页面型（action参数值不为cmd的请求）会优先读取 工程目录/pages/[指令名称].page.php ，如果不存在则会读取 ~/[页面名称].page.php
+
+
+==========================================================================================================
+build 页的项目拓展列表(ext目录下的 [模块名].php作为附加数据说明)
+	      条目						  模块名
+	说明附加项						readme
+	编译附加项						compile
+	发布附加项						publish
+	管理附加项						manager
+	自定义命令附加项					custom
+	下载附加项（必须配置下载地址）		download
+	设置附加项						setting.page
+	
+build 页的项目扩展内容必须在 [项目目录]/config.php 中通过$auto_builder->loadProjectConf 函数加载并填充ext_modules字段
+	字段内容为包含的文件路径(相对于项目目录),如：
+	$auto_builder->loadProjectConf(array(
+		'ext_modules' => array(
+			'readme' => 'ext/readme.php'
+		)
+	));
+
+
+
+==========================================================================================================
+默认build页的JS事件列表:
+	 OnProcessFinished		: 执行进程完毕 		 	function (evt, jquery_ajax_params)
+	 OnVersionInfoLoaded	: 完成获取版本信息  		function (evt, jquery_ajax_params)
+	 OnServerInfoLoaded		: 完成读取服务器信息		function (evt, jquery_ajax_params)
+ 	 OnPackageInfoLoaded	: 完成读取已编译的包信息	function (evt, jquery_ajax_params)
+ 	 
+ 	 OnCompileCmdSend		: 发送编译指令前  function (evt, ajax_data, opt)
+ 	 OnPublishCmdSend		: 发送发布指令前  function (evt, ajax_data, opt)
+ 	 OnManagerCmdSend		: 发送管理指令前  function (evt, ajax_data, opt)
+ 	 
