@@ -26,16 +26,15 @@
     </div>
     <div class="header-middle">
         <!-- Start Nav -->
-        <div class="navbar-brand float-left">
-            <!-- Start Logo -->
-            <img id="logo" src="img/logo.png" alt="常用工具集" style="width: 64px;" />
-            <!-- End Logo -->
-        </div>
-		<nav class="navbar navbar-toggleable-md bg-faded navbar-inverse float-right rounded" role="navigation">
-            <div class="collapse navbar-collapse">
-                <ul id="nav" class="navbar-nav text-center">
+		<nav class="navbar navbar-toggleable-md bg-faded navbar-inverse" role="navigation">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <span id="main-nav-brand" class="navbar-brand collapse"><img id="logo" src="img/logo.png" alt="常用工具集" style="width: 40px;" /></span>
+            <div class="collapse navbar-collapse" id="nav-content">
+                <ul id="nav" class="navbar-nav text-center ml-auto">
                     <li class="nav-item <?php if('hello_world' == $service->project['name']) echo ' active' ?>">
-                        <a class="nav-link" href="hello_world.php">项目名称 (开发中)</a>
+                        <a class="nav-link" href="hello_world.php">酋长万岁 (开发中)</a>
                     </li>
                 </ul>
             </div>

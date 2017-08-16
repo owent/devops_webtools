@@ -3,24 +3,24 @@ class ProjectWebToolsFrame {
 	private $_oauth_config = array(
 		'gitlab' => array(
 			'name' => 'webtools',
-			'client_secret' => 'gitlab secret',
-			'authorize' => 'https://gitlab部署域名/oauth/authorize',
+			'client_secret' => 'client_secret参数',
+			'authorize' => 'https://git.giuer.com/oauth/authorize',
 			'authorize_params' => array(
-				'client_id' => 'gitlab client_id',
-				'redirect_uri' => '[本工具部署地址]',
+				'client_id' => 'client_id参数',
+				'redirect_uri' => 'https://webtools.giuer.com',
 				'response_type' => 'code'
 			),
-			'token' => 'https://gitlab部署域名/oauth/token',
-			'api' => 'https://gitlab部署域名/api/v3',
-			'url' => 'https://gitlab部署域名/u/%s'
+			'token' => 'https://git.giuer.com/oauth/token',
+			'api' => 'https://git.giuer.com/api/v3',
+			'url' => 'https://git.giuer.com/u/%s'
 		), /*
 		'github' => array(
 			'name' => 'webtools',
-			'client_secret' => 'github secret',
+			'client_secret' => 'client_secret参数',
 			'authorize' => 'https://github.com/login/oauth/authorize',
 			'authorize_params' => array(
-				'client_id' => 'github client_id',
-				'redirect_uri' => '[本工具部署地址]',
+				'client_id' => 'client_id参数',
+				'redirect_uri' => 'https://webtools.giuer.com',
 				'scope' => 'user'
 			),
 			'token' => 'https://github.com/login/oauth/access_token',
@@ -29,12 +29,13 @@ class ProjectWebToolsFrame {
         ),*/
         '企业微信' => array(
 			'name' => 'webtools',
-			'client_secret' => '企业微信 secret',
+			'client_secret' => 'client_secret参数',
 			'authorize' => 'https://open.work.weixin.qq.com/wwopen/sso/qrConnect',
 			'authorize_params' => array(
-                'appid' => '企业微信企业ID',
-                'agentid' => '企业微信agentid（企业ID）',
-				'redirect_uri' => '[本工具部署地址]'
+                'appid' => 'appid参数',
+                'agentid' => 'agentid参数',
+				'redirect_uri' => 'https://webtools.giuer.com'
+                # https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=appid参数&agentid=agentid参数&redirect_uri=https%3A%2F%2Fwebtools.giuer.com&state=web_login@owent
 			),
 			'token' => 'https://qyapi.weixin.qq.com/cgi-bin/gettoken',
 			'api' => 'https://qyapi.weixin.qq.com/cgi-bin',

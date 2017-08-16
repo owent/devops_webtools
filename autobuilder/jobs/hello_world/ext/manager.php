@@ -24,6 +24,7 @@
 <tr><td colspan="2" style="text-align: center;"><h5>数据库配置</h5></td></tr>
 <tr><td>数据库地址 </td><td><input type="text" data-source="db_cluster" class="form-control" value="127.0.0.1:7001-7006" /></td></tr>
 <tr><td colspan="2" style="text-align: center;"><h5>服务器配置</h5></td></tr>
+<tr><td>战斗服务器 </td><td><input type="text" data-source="fight_server" class="form-control" value="http://127.0.0.1:8080/" /></td></tr>
 <tr><td>地图服务器Etcd地址 </td><td><input type="text" data-source="map_server_etcd_host" class="form-control" value="http://127.0.0.1:2379" /></td></tr>
 </table>
 </div>

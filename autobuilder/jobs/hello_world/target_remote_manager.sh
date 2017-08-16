@@ -39,4 +39,4 @@ if [ ! -z "$AUTOBUILDER_ZONE_CUSTOM_INNER_IPV4" ]; then
 fi
 
 export AUTO_SSH_EXEC_TIMEOUT=1800;
-auto_ssh_exec $manager_ip $manager_port $manager_user $manager_password "export $AUTOBUILDER_ENV_STR; export CPRINTF_MODE=html; export CPRINTF_THEME=dark; cd $manager_path/$PUBLISH_ENV_SERVER_DIR/tools/script && $manager_cmd"
+auto_ssh_exec $manager_ip $manager_port $manager_user $manager_password "export $AUTOBUILDER_ENV_STR; export CPRINTF_MODE=html; export CPRINTF_THEME=dark; if [ -e '$manager_path/$PUBLISH_ENV_SERVER_DIR/tools/script' ]; then cd '$manager_path/$PUBLISH_ENV_SERVER_DIR/tools/script'; fi; $manager_cmd"

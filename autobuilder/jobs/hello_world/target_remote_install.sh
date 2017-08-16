@@ -40,8 +40,8 @@ function publish_server() {
     TMP_DIR="$(date '+%Y%m%d%H%M%S')";
 	auto_ssh_exec $install_ip $install_port $install_user $install_password "mkdir -p $install_path/$TMP_DIR";
 	auto_scp "$file_src"  "$install_user@$install_ip:$install_path/$TMP_DIR/$file_name" "$install_password";
-	auto_ssh_exec $install_ip $install_port $install_user $install_password "if [ -e '$install_path/$PUBLISH_ENV_SERVER_DIR' ]; then cd $install_path/$PUBLISH_ENV_SERVER_DIR/tools/script; env $AUTOBUILDER_ENV_STR CPRINTF_MODE=html CPRINTF_THEME=dark sh stop_all.sh; cd $install_path; fi; cd $install_path/$TMP_DIR && 7z $unzip_opt $file_name; ln -sf $install_path/$TMP_DIR/$PUBLISH_ENV_SERVER_DIR $install_path/$PUBLISH_ENV_SERVER_DIR;";
-    auto_ssh_exec $install_ip $install_port $install_user $install_password "cd $install_path; source $install_path/$PUBLISH_ENV_SERVER_DIR/tools/script/common/common.sh; remove_more_than * $PUBLISH_ENV_SERVER_NUMBER ;";
+	auto_ssh_exec $install_ip $install_port $install_user $install_password "export $AUTOBUILDER_ENV_STR; export CPRINTF_MODE=html; export CPRINTF_THEME=dark; if [ -e '$install_path/$PUBLISH_ENV_SERVER_DIR' ]; then cd $install_path/$PUBLISH_ENV_SERVER_DIR/tools/script; sh stop_all.sh; cd $install_path; rm -f $PUBLISH_ENV_SERVER_DIR; fi; cd $install_path/$TMP_DIR && 7z $unzip_opt $file_name; ln -sf $install_path/$TMP_DIR/$PUBLISH_ENV_SERVER_DIR $install_path/$PUBLISH_ENV_SERVER_DIR;";
+    auto_ssh_exec $install_ip $install_port $install_user $install_password "cd $install_path; source $install_path/$PUBLISH_ENV_SERVER_DIR/tools/script/common/common.sh; remove_more_than \"*\" $PUBLISH_ENV_SERVER_NUMBER ;";
 }
 
 # ==================== 发布客户端 ====================

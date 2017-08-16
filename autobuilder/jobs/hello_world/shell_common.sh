@@ -293,15 +293,15 @@ GIT_USER=[编译机Git用户名]
 SERVER_DIR=Server
 CLIENT_DIR=Client
 RESOURCE_DIR=Resource
-PACKAGE_DIR=/home/website/htdocs/publish/hello_world
+PACKAGE_DIR=/home/website/htdocs/publish/hola_my_lord
 
 # 公用编译机信息
 COMPILE_ENV_IP=10.1.100.41
 COMPILE_ENV_PORT=22
 COMPILE_ENV_USER=[编译机用户名]
 COMPILE_ENV_PWD=[编译机密码]
-COMPILE_ENV_PROJECT_NAME=hello_world
-COMPILE_ENV_PATH=/home/autobuilder/hello_world
+COMPILE_ENV_PROJECT_NAME=hola_my_lord
+COMPILE_ENV_PATH=/home/autobuilder/hola_my_lord
 
 # 公用发布机信息
 PUBLISH_ENV_SERVER_DIR=hello_project

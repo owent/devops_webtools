@@ -13,8 +13,9 @@ global $service;
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style type="text/css">
     @import url( css/base.css );
+	@import url( css/tether.min.css );
+	@import url( css/tether-theme-basic.min.css );
     @import url( css/bootstrap.min.css );
-    @import url( css/bootstrap-grid.min.css );
 	@import url( css/bootstrap-theme.min.css );
     @import url( js/css/jquery-ui.min.css );
 	@import url( js/css/jquery-ui.structure.min.css );
@@ -27,6 +28,8 @@ global $service;
     }
 </style>
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/tether.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	window.webtools_conf = {

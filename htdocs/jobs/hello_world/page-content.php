@@ -10,14 +10,14 @@ if(isset($_REQUEST['action'])) {
 	<ul>
     <!-- <li><a href="?oss=view"><span style="font-style: italic; color: Red;">new</span> 运营分析系统</a></li>-->
     <li><a href="javascript: seed_alert('尚未接入')" title="运营分析系统">运营分析系统</a></li>
-    <!-- <li><a href="http://GM工具地址/latest.nightly/gmtools?passwd=GM工具密码"> Client GM工具(每日构建)</a></li>-->
+    <!-- <li><a href="https://tools.muyo.co/publish/hola_my_lord/client/latest.nightly/gmtools?passwd="> Client GM工具(每日构建)</a></li>-->
     <li><a href="javascript: seed_alert('尚未接入')" title="Client GM工具(每日构建)">Client GM工具(每日构建)</a></li>
     <li><a href="javascript: open_dialog_environment_list();" title="开发环境地址列表">开发环境地址列表</a></li>
-	<li><a href="//jenkins.io/" title="Jenkins自动定时构建系统" target="_blank">Jenkins自动定时构建系统</a></li>
-    <li><a href="javascript: seed_alert('尚未接入')" title="Server包下载" target="_blank">Server包下载(每日构建)</a></li>
-	<li><a href="javascript: seed_alert('尚未接入')" title="Client包下载" target="_blank">Client包下载(每日构建)</a></li>
+	<li><a href="//ci.giuer.com/view/hola_my_lord/" title="Jenkins自动定时构建系统" target="_blank">Jenkins自动定时构建系统</a></li>
+    <li><a href="//webtools.giuer.com/publish/hola_my_lord/server/latest.nightly/" title="Server包下载" target="_blank">Server包下载(每日构建)</a></li>
+	<li><a href="//webtools.giuer.com/publish/hola_my_lord/client/latest.nightly/" title="Client包下载" target="_blank">Client包下载(每日构建)</a></li>
 	<li><a href="javascript: seed_alert('尚未接入')" title="Client自动化文档">Client自动化文档</a></li>
-	<li><a href="javascript: seed_alert('尚未接入')" title="Server自动化文档" target="_blank">Server自动化文档</a></li>
+	<li><a href="//webtools.giuer.com/publish/hola_my_lord/doc/server/" title="Server自动化文档" target="_blank">Server自动化文档</a></li>
     <li><a href="?project=<?php echo $service->getProjectName(); ?>&action=builder" title="自动编译&发布系统">自动编译&amp;发布系统</a></li>
 	</ul>
     <br />
@@ -31,11 +31,9 @@ if(isset($_REQUEST['action'])) {
 
     <tr>
     <td>Nightly Build</td>
-    <td>尚未配置</td>
-    <!--<td><a href="https://travis-ci.org/atframework/libatbus"><img src="https://travis-ci.org/atframework/libatbus.svg?branch=master" alt="Build Status"></a></td>-->
-    <td><a href="https://travis-ci.org/atframework/libatbus"><img src="https://travis-ci.org/atframework/libatbus.svg?branch=master" alt="Build Status"></a></td>
-    <td>尚未配置</td>
-    <!--<td><a href="https://travis-ci.org/atframework/libatbus"><img src="https://travis-ci.org/atframework/libatbus.svg?branch=master" alt="Build Status"></a></td>-->
+    <td><a href="//ci.giuer.com/job/hola_my_lord.client.android.nightly/"><img src="//ci.giuer.com/job/hola_my_lord.client.android.nightly/badge/icon" alt="Build Status"></a></td>
+    <td><a href="//ci.giuer.com/job/hola_my_lord.client.ios.nightly/"><img src="//ci.giuer.com/job/hola_my_lord.client.ios.nightly/badge/icon" alt="Build Status"></a></td>
+    <td><a href="//ci.giuer.com/job/hola_my_lord.client.windows.nightly/"><img src="//ci.giuer.com/job/hola_my_lord.client.windows.nightly/badge/icon" alt="Build Status"></a></td>
     </tr>
     </tbody>
     </table>
@@ -47,7 +45,7 @@ if(isset($_REQUEST['action'])) {
     </tr>
     <tr>
     <td>Nightly Build</td>
-    <td><a href="https://travis-ci.org/atframework/libatbus"><img src="https://travis-ci.org/atframework/libatbus.svg?branch=master" alt="Build Status"></a></td>
+    <td><a href="//ci.giuer.com/job/hola_my_lord.server.nightly/"><img src="//ci.giuer.com/job/hola_my_lord.server.nightly/badge/icon" alt="Build Status"></a></td>
     </tr>
     </tbody></table>
     <br />

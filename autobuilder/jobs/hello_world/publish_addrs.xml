@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publish_addrs>
-    <zone name="Dev1公共开发环境(IP或域名)" status="OK" id="1">
-        <url>IP或域名</url>
+    <zone name="Dev1公共开发环境(develop1.holamylord.com)" status="OK" id="1">
+        <url>develop1.holamylord.giuer.com</url>
         <port>22</port>
-        <user>运行服务器进程用户名</user>
-        <passwd>运行服务器进程用户的密码</passwd>
-        <install_path>/home/运行服务器进程用户名/hello_world</install_path>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/home/[用户名]/hola_my_lord</install_path>
         <use_ip>1</use_ip>
         <zone_id>1</zone_id>
         <services>
@@ -16,21 +16,256 @@
             <server name="网关代理服务器" param=" atproxy" />
             <cmd name="启动/重启服务">sh restart_all.sh</cmd>
             <cmd name="关闭服务">sh stop_all.sh</cmd>
-            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
             <cmd name="重新加载资源">sh reload_all.sh</cmd>
             <cmd name="清空数据库" noserver="true">cd /home/redis/latest/bin; for ((i=7001;i&lt;=7006;++i)); do ./redis-cli -c -p $i FLUSHALL; done</cmd>
             <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
         </services>
         <custom>
             <group_id>1</group_id>
-            <outer_domain>IP或域名</outer_domain>
+            <outer_domain>develop1.holamylord.com</outer_domain>
             <outer_ipv6></outer_ipv6>
             <outer_ipv4></outer_ipv4>
             <inner_ipv6></inner_ipv6>
             <inner_ipv4></inner_ipv4>
             <db_cluster>127.0.0.1:7001-7006</db_cluster>
             <etcd_host>http://127.0.0.1:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
             <map_server_etcd_host>http://127.0.0.1:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="用户友好测试服务器(deploy1.holamylord.com)" status="OK" id="2">
+        <url>deploy1.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>1</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清空数据库" noserver="true">cd /home/redis/latest/bin; for ((i=7001;i&lt;=7006;++i)); do ./redis-cli -c -h db-deploy.holamylord.com -p $i FLUSHALL; done</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>1</group_id>
+            <outer_domain>deploy1.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.29:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.29:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.29:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="QA1测试服务器(qa1.holamylord.com)" status="OK" id="3">
+        <url>qa1.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>11</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>11</group_id>
+            <outer_domain>qa1.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.30:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.30:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.30:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="QA2测试服务器(qa2.holamylord.com)" status="OK" id="4">
+        <url>qa2.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>12</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清空数据库" noserver="true">cd /home/redis/latest/bin; for ((i=7001;i&lt;=7006;++i)); do ./redis-cli -c -p $i FLUSHALL; done</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>12</group_id>
+            <outer_domain>qa2.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.30:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.30:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.30:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="测试服务器1(test1.holamylord.com)" status="OK" id="5">
+        <url>test1.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>21</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清空数据库" noserver="true">cd /home/redis/latest/bin; for ((i=7001;i&lt;=7006;++i)); do ./redis-cli -c -p $i FLUSHALL; done</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>21</group_id>
+            <outer_domain>test1.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.30:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.30:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.30:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="测试服务器2(test2.holamylord.com)" status="OK" id="6">
+        <url>test2.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>22</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>22</group_id>
+            <outer_domain>test2.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.30:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.30:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.30:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="测试服务器3(test3.holamylord.com)" status="OK" id="7">
+        <url>test3.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>23</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>23</group_id>
+            <outer_domain>test3.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.30:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.30:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.30:8080/</map_server_etcd_host>
+        </custom>
+     </zone>
+	 <zone name="测试服务器4(test4.holamylord.com)" status="OK" id="8">
+        <url>test4.holamylord.com</url>
+        <port>22</port>
+        <user>[用户名]</user>
+        <passwd>[密码]</passwd>
+        <install_path>/mnt/hola_my_lord</install_path>
+        <use_ip>1</use_ip>
+        <zone_id>24</zone_id>
+        <services>
+            <server name="登入服务器" param=" loginsvr" />
+            <server name="游戏服务器" param=" gamesvr" />
+            <server name="地图服务器" param=" mapsvr" />
+            <server name="网关服务器" param=" atgateway" />
+            <server name="网关代理服务器" param=" atproxy" />
+            <cmd name="启动/重启服务">sh restart_all.sh</cmd>
+            <cmd name="关闭服务">sh stop_all.sh</cmd>
+            <cmd name="初始化环境" noserver="true">python3 gen_conf.py -s atsystem.stdout=false -s global.zone_id=$AUTOBUILDER_ZONE_ZONE_ID -s global.group_id=$AUTOBUILDER_ZONE_CUSTOM_GROUP_ID -s server.atproxy.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_ETCD_HOST  -s db.cluster_default_host=$AUTOBUILDER_ZONE_CUSTOM_DB_CLUSTER  -s server.mapsvr.etcd_hosts=$AUTOBUILDER_ZONE_CUSTOM_MAP_SERVER_ETCD_HOST -s server.mapsvr.fight_server=$AUTOBUILDER_ZONE_CUSTOM_FIGHT_SERVER</cmd>
+            <cmd name="重新加载资源">sh reload_all.sh</cmd>
+            <cmd name="清理服务器包" noserver="true" pendding="sh clear_ipcs.sh">sh stop_all.sh; cd $AUTOBUILDER_ZONE_INSTALL_PATH; rm -rf hello_project; rm -rf *.7z;</cmd>
+        </services>
+        <custom>
+            <group_id>24</group_id>
+            <outer_domain>test4.holamylord.com</outer_domain>
+            <outer_ipv6></outer_ipv6>
+            <outer_ipv4></outer_ipv4>
+            <inner_ipv6></inner_ipv6>
+            <inner_ipv4></inner_ipv4>
+            <db_cluster>10.1.100.30:7001-7006</db_cluster>
+            <etcd_host>http://10.1.100.30:2379</etcd_host>
+            <fight_server>http://10.1.100.43:8080/</fight_server>
+            <map_server_etcd_host>http://10.1.100.30:8080/</map_server_etcd_host>
         </custom>
      </zone>
 </publish_addrs>
