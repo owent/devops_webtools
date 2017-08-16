@@ -7,7 +7,7 @@ class ProjectWebToolsFrame {
 			'authorize' => 'https://git.giuer.com/oauth/authorize',
 			'authorize_params' => array(
 				'client_id' => 'client_id参数',
-				'redirect_uri' => 'https://webtools.giuer.com',
+				'redirect_uri' => '[本工具部署地址]',
 				'response_type' => 'code'
 			),
 			'token' => 'https://git.giuer.com/oauth/token',
@@ -20,7 +20,7 @@ class ProjectWebToolsFrame {
 			'authorize' => 'https://github.com/login/oauth/authorize',
 			'authorize_params' => array(
 				'client_id' => 'client_id参数',
-				'redirect_uri' => 'https://webtools.giuer.com',
+				'redirect_uri' => '[本工具部署地址]',
 				'scope' => 'user'
 			),
 			'token' => 'https://github.com/login/oauth/access_token',
@@ -34,8 +34,8 @@ class ProjectWebToolsFrame {
 			'authorize_params' => array(
                 'appid' => 'appid参数',
                 'agentid' => 'agentid参数',
-				'redirect_uri' => 'https://webtools.giuer.com'
-                # https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=appid参数&agentid=agentid参数&redirect_uri=https%3A%2F%2Fwebtools.giuer.com&state=web_login@owent
+				'redirect_uri' => '[本工具部署地址]'
+                # https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=appid参数&agentid=agentid参数&redirect_uri=[本工具部署地址]&state=web_login@owent
 			),
 			'token' => 'https://qyapi.weixin.qq.com/cgi-bin/gettoken',
 			'api' => 'https://qyapi.weixin.qq.com/cgi-bin',
