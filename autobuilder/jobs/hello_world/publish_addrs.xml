@@ -5,7 +5,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/home/[用户名]/hola_my_lord</install_path>
+        <install_path>/home/[用户名]/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>1</zone_id>
         <services>
@@ -39,7 +39,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>1</zone_id>
         <services>
@@ -73,7 +73,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>11</zone_id>
         <services>
@@ -106,7 +106,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>12</zone_id>
         <services>
@@ -140,7 +140,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>21</zone_id>
         <services>
@@ -174,7 +174,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>22</zone_id>
         <services>
@@ -207,7 +207,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>23</zone_id>
         <services>
@@ -240,7 +240,7 @@
         <port>22</port>
         <user>[用户名]</user>
         <passwd>[密码]</passwd>
-        <install_path>/mnt/hola_my_lord</install_path>
+        <install_path>/mnt/hello_world</install_path>
         <use_ip>1</use_ip>
         <zone_id>24</zone_id>
         <services>
